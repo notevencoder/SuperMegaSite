@@ -1,0 +1,19 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    width: 80%;
+    max-width: 1500px;
+
+    display: block;
+    margin: 0 auto;
+}
+
+
+main {
+    background-color: #eee;
+    min-height: 100vh;
+}

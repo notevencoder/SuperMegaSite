@@ -1,0 +1,43 @@
+body {
+    --bg-color: #CD5C5C;
+}
+
+main {
+    height: 500px;
+    
+    margin-top: 30px;
+
+    position: relative;
+}
+
+
+
+.class1{
+    height: 30px;
+
+
+    
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    background-color: #ccc0d9;
+
+}
+
+.class2{
+    height: 30px;
+
+    
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    background-color: #fbd4b4;
+    
+}
+
+.bold{
+font-weight: 700;
+
+}

@@ -1,0 +1,49 @@
+#shuffle_btn{
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 32px;
+  }
+
+
+  #win_text{
+    position: absolute;
+  
+    color:red;
+
+    font-weight: bold;
+  
+    display: none;
+  
+    animation: win-anim 2s forwards 0s infinite;
+  }
+    
+  @keyframes win-anim{
+    0% {font-size: 64px; left: 540px; top: 420px;}
+    50%{font-size: 144px; left: 508px; top: 360px;}
+    100% {font-size: 64px; left: 540px; top: 420px;}
+  }
+  
+  #puzzle-area{
+    width: 1500px;
+    height: 1500px;
+
+    outline: 2px;
+    outline-color: red;
+    margin-top: 20px;
+    margin-left: 20px;
+    position: relative;
+
+  }
+  
+  .piece{
+    position: absolute; 
+    background-size: contain; 
+    
+  }
+  
+  .piece--hidden{
+    display: none;
+  }
+  .win{
+    display: none;
+  }

@@ -1,0 +1,163 @@
+.flex {
+    width: 600px;
+    height: 600px;
+
+    background-size: contain;
+    position: relative;
+
+    margin: 20px 0;
+}
+
+.bullet {
+    width: 45%;
+    height: 30%;
+    background: url("../img/flex/mini-gun6.png");
+    background-size: contain;
+    transform: rotate(30deg);
+    position: absolute;
+    left: 18%;
+    top: 44%;
+
+}
+
+
+.flex:hover {
+    background: transparent;
+    transform: rotate(0deg);
+    background-size: contain;
+}
+
+.flex:hover .bullet {
+    display: block;
+    animation: roll 0.1s;
+    transform: rotate(0deg);
+    background-size: contain;
+}
+
+
+.flex:hover::before {
+    content: "Внимание...";
+    font-size: 12px;
+    font-weight: bold;
+
+    position: absolute;
+    right: 0;
+}
+
+.flex:active::before {
+    content: "Огонь!!!";
+    font-size: 12px;
+    font-weight: bold;
+    color: red;
+
+    position: absolute;
+    right: 0;
+}
+
+.flex:active .bullet {
+    background-size: contain;
+}
+
+
+.gun {
+    width: 37%;
+    height: 34%;
+    background: url("../img/flex/gun5.png");
+    background-size: contain;
+
+    position: absolute;
+    left: 25%;
+    top: 44%;
+
+    display: none;
+    opacity: 0%;
+}
+
+.flex:active .gun {
+    display: block;
+    animation: gun-animation 0.41s ;
+}
+
+.flex:active .bullet {
+    display: block;
+    animation: shooting 0.41s ;
+}
+
+@keyframes gun-animation {
+    0% {
+        display: block;
+        left:40%; 
+        top: 32%;
+        transform-origin: right bottom;
+        opacity: 100%;
+    }
+
+    100% {
+        display: block;
+        left:100%; 
+        top: 32%;
+        opacity: 100%;
+        transform-origin: right bottom;
+        
+        
+    }
+}
+
+@keyframes roll {
+    0% {
+        transform: rotate(30deg);
+    }
+   
+    100% {
+        transform: rotate(0deg);
+    }
+}
+@keyframes shooting {
+    0% {
+        position: absolute;
+        left: 18%;
+        top: 20%;
+        width:60%;
+        height: 60%;
+        transform: rotate(0deg);
+        background: url("../img/flex/gun3.png");
+        background-size: contain;
+    }
+    25% {
+         background: url("../img/flex/gun3.png");
+        transform: rotate(-30deg);
+        transform-origin: left;
+        background-size: contain;
+    }
+    50% {
+        width:60%;
+        height: 60%;
+        background: url("../img/flex/gun6.png");
+        background-size: contain;
+    }
+    100% {
+        position: absolute;
+        left: 18%;
+        top: 20%;
+        width:60%;
+        height: 60%;
+        
+        transform: rotate(0deg);
+        background: url("../img/flex/gun6.png");
+        background-size: contain;
+    }
+}
+
+.flex:active {
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0% ,100%{
+        transform: translateY(25px);
+    }
+   
+    50% {
+        transform: translateY(-25px);
+    }
+}

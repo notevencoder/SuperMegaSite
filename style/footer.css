@@ -1,0 +1,30 @@
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 120px;
+}
+
+.footer-nav {
+    list-style: none;
+
+    display: flex;
+}
+
+.footer-nav > li:not(:last-child) {
+    margin-right: 20px;
+}
+
+.footer-nav__item {
+    text-decoration: none;
+    color: #000000;
+    font-size: 20px;
+}
+
+@media (max-width: 992px) {
+    .footer-nav {
+        display: none;
+    }
+}
+
