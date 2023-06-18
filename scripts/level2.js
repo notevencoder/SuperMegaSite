@@ -1,8 +1,9 @@
 import Rect from "./Rect.js";
-import Config from "./config.js";
 import level from "./level.js";
 import getRandomInt from "./supportFunction.js";
 import wordContainer from "./wordContainer.js";
+import Config from "./config.js";
+const config = new Config;
 
 var _questions    =    ["Каво","Деда","Дио","Отравленный","Полнареф"];
 
@@ -162,7 +163,8 @@ export default class level2 extends level{
 
     checkWin(answer, target){
         if (this.rightAnswer.has(answer)){
-
+            config.right.play();
+             config.right.currentTime = 0;
             target.defaultColour = 'green';
             target.colour = target.defaultColour;
             target.active = false;
@@ -171,6 +173,8 @@ export default class level2 extends level{
             
         }
         else{
+            config.wrong.play();
+            config.wrong.currentTime = 0;
             target.defaultColour = 'grey';
             target.colour = target.defaultColour;
             target.active = false;

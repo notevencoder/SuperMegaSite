@@ -2,6 +2,8 @@ import level from "./level.js";
 import getRandomInt from "./supportFunction.js";
 import wordContainer from "./wordContainer.js";
 import Button from "./button.js";
+import Config from "./config.js";
+const config = new Config;
 
 var _questions    =    ["Петух","Адепт","Алмаз","Апорт","Астма","Аборт"];
 
@@ -214,6 +216,8 @@ export default class level3 extends level{
 
             if (num >= this.question.length){
                 this.numOfQuiestions++;
+                config.right.play();
+                config.right.currentTime = 0;
                 this.newTask();
             }
             else{
@@ -221,7 +225,8 @@ export default class level3 extends level{
                 let nick = localStorage.getItem("current");
             let scoreTable = JSON.parse(localStorage.getItem("score-table"));
             let points =  Number(document.getElementById('score').innerHTML);
-    
+            config.wrong.play();
+            config.wrong.currentTime = 0;
             points -= 200;
             document.getElementById('score').innerHTML = points;
             }
