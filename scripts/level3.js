@@ -152,7 +152,6 @@ export default class level3 extends level{
     checkWin(answer, target){
 
       
-        
         this.questionRects[this.currentRow][this.currentChar].text = target.text;
         
         target.defaultColour = 'gray';
@@ -221,16 +220,29 @@ export default class level3 extends level{
                 this.newTask();
             }
             else{
-
+                if(this.currentRow >= this.questionRects.length){
+                    let nick = localStorage.getItem("current");
+                    let scoreTable = JSON.parse(localStorage.getItem("score-table"));
+                    let points =  Number(document.getElementById('score').innerHTML);
+                    config.wrong.play();
+                    config.wrong.currentTime = 0;
+                    points -= 1500;
+                    document.getElementById('score').innerHTML = points;
+                    
+                    this.numOfQuiestions++;
+                    this.newTask();
+                }
+                else{
                 let nick = localStorage.getItem("current");
-            let scoreTable = JSON.parse(localStorage.getItem("score-table"));
-            let points =  Number(document.getElementById('score').innerHTML);
-            config.wrong.play();
-            config.wrong.currentTime = 0;
-            points -= 200;
-            document.getElementById('score').innerHTML = points;
+                let scoreTable = JSON.parse(localStorage.getItem("score-table"));
+                let points =  Number(document.getElementById('score').innerHTML);
+                config.wrong.play();
+                config.wrong.currentTime = 0;
+                points -= 200;
+                document.getElementById('score').innerHTML = points;}
             }
-                
+
+            
 
                // console.log("num " , num)
 
