@@ -5,8 +5,7 @@ import Button from "./button.js";
 import Config from "./config.js";
 const config = new Config;
 
-var _questions    =    ["Петух","Адепт","Алмаз","Апорт","Астма","Аборт"];
-
+var _questions    =    ["Петух","Адепт","Алмаз","Апорт","Астма","Аборт","Немец","Обувь","Озеро","Багет","Бровь","Ведро","Вилка"];
 const _maxQuestions = 2;
 
                          

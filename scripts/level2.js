@@ -5,11 +5,11 @@ import wordContainer from "./wordContainer.js";
 import Config from "./config.js";
 const config = new Config;
 
-var _questions    =    ["Каво","Деда","Дио","Отравленный","Полнареф"];
+var _questions    =    ["Петух","Адепт","Алмаз","Апорт","Астма","Аборт","Немец","Обувь","Озеро","Багет","Бровь","Ведро","Вилка"];
 
 
 const _maxQuestions = 2;
-const _maxLetters = 5;             
+const _maxLetters = 7;             
 
 
 export default class level2 extends level{
