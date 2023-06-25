@@ -8,7 +8,7 @@ var _questions    =    ["Висит груша, нельзя скушать.","�
 var _rightAnswer  =    ["Лампочка","Деда", "Языка Java", "Водопровод", "6"];
 var _wrongAnswers =    [["Груша","Вишня","Сережа","Никтарин","Виноград","Гречка"]
                          ,["Кофе","Ариаки","Никто не знает!","Принцессы","Меня","Джотаро Куджо"]
-                         ,["Кофе","Языка Java","Никто не знает!","Принцессы","Меня","Джотаро Куджо"],
+                         ,["Кофе","Праздник","Никто не знает!","Принцессы","Меня","Джотаро Куджо"],
                          ["Вода","Электросеть","Змея","Киросин","Звезда","Котлета"],
                          ["999","7","2","3","4","11"]];
 
@@ -23,14 +23,20 @@ export default class level1 extends level{
             this.numOfQuiestions = 0;
 
             this.won = false;
-           
+            this.tip = "Перенеси праильный ответ в зону!";
             
             this.i = 0;
             console.log("Level1: _rightAnswer[i] = " , _rightAnswer[this.i]);
 
-            this.questionRects = [];
+            this.questionRects = new wordContainer(this,this.container,this.checkWin.bind(this), "123", {x:0,y:0});
             this.rects = [];
-            this.questionRects.push(new wordContainer(this,this.container,this.checkWin.bind(this), "123", {x:0,y:0}));
+          
+            this.zone = new wordContainer(this,this.container,null, "", {x:0,y:0}, {x:0,y:0}, false);
+            this.zone.defaultColour = 'orange';
+            this.zone.colour = 'orange';
+            this.zone.rect.width = 0;
+            this.zone.rect.height = 0;
+            this.zone.active = false;
            
             this.rects.push(new wordContainer(this,this.container,null, "123", {x:100,y:500}, {x:0,y:0}, true));
             this.rects.push(new wordContainer(this,this.container,null, "123", {x:300,y:500}, {x:0,y:0}, true));
@@ -41,9 +47,7 @@ export default class level1 extends level{
             this.finishButton = new wordContainer(this,this.container,this.checkWin.bind(this), "123", {x:config.canvasWidth / 2,y:config.canvasHeight / 5 * 4}, {x:0,y:0}, false);
             this.finishButton.changeWord("check");
 
-            this.questionRects.forEach(element => {
-                element.active = false;
-            });
+            this.questionRects.active = false;
             this.update();
             this.sentence = "az";
             //console.log(`The character code ${this.sentence.charCodeAt(0)} is equal to ${this.sentence.charAt(0)}`);
@@ -80,10 +84,14 @@ export default class level1 extends level{
             _rightAnswer.splice(i,1);
             _wrongAnswers.splice(i,1);
             
-            this.questionRects[0].changeWord(this.question);
-            this.questionRects[0].pos.x = 0;
-            this.questionRects[0].pos.y = 0;
+            this.questionRects.changeWord(this.question);
             
+            this.questionRects.pos.x = 0;
+            this.questionRects.pos.y = 0;
+
+            this.zone.changePos(this.questionRects.rect.x, this.questionRects.rect.y  + this.questionRects.rect.height);
+            this.zone.rect.width  = this.questionRects.rect.width ;
+            this.zone.rect.height = Math.max(this.questionRects.rect.width / 2 , this.questionRects.rect.height);
             
             let rightAnswerIndex = getRandomInt(0,this.rects.length );
             console.log(" rightAnswerIndex " , rightAnswerIndex);
@@ -97,20 +105,29 @@ export default class level1 extends level{
                     this.rects[i].changeWord(buff[i]);
 
             }
+            this.rects[0].changePos(100,500);
+            for (let i = 1; i < this.rects.length; i++){
+                this.rects[i].changePos(Math.round(this.rects[i-1].rect.width) + this.rects[i-1].pos.x, 500 + 60 * (i % 2) );
+                console.log(this.rects[i]);
+                console.log(this.rects[i].rect);
+                console.log(Math.round(this.rects[i-1].rect.width)," - width, ", this.rects[i-1].pos.x, " - x");
+
+            }
+
         }
      
     }
 
     draw(){
         let i = 0;
+        
+        this.zone.draw(0, 'red');
         this.rects.forEach(element => {
             element.draw(i,i);
             i++;
         });
 
-        this.questionRects.forEach(element => {
-            element.draw(0,0);
-        });
+        this.questionRects.draw(0,0);
         this.finishButton.draw(0,0);
     }
 
@@ -125,7 +142,7 @@ export default class level1 extends level{
         let ans = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2) );
         console.log("ans ",ans);
         console.log("this text ",a.text);
-        return ans < 300;
+        return this.zone.isInRect(a.rect.x, a.rect.y);
     }
 
     win(){
@@ -158,7 +175,7 @@ export default class level1 extends level{
         let closeRects = 0;
         let isRight = false;
         this.rects.forEach(element => {
-            if (this.checkDist(element, this.questionRects[0])){
+            if (this.checkDist(element, this.questionRects)){
                 closeRects++;
                 if(element.text == this.rightAnswer ) 
                     isRight = true;

@@ -17,7 +17,7 @@ export default class level3 extends level{
         super(container);
             this.newTask = newTask;
             this.container = container;
-            
+            this.tip = "Угадай слово из 5 букв!";
             this.numOfQuiestions = 0;
             this.currentRow = 0;
             this.currentChar = 0;

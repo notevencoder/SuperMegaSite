@@ -18,20 +18,21 @@ export default class Task{
         this.levels = [ new level1(this.container, this.newQuestion.bind(this)), new level2(this.container, this.newQuestion.bind(this)), new level3(this.container, this.newQuestion.bind(this))];
         this.levels[0].activate();
         
-        
-        this.menuHide = true;
+        this.menuHide = false;
         this.menu = [];
         this.background = new Rect(conifg.canvasWidth / 5,conifg.canvasHeight/ 5, 750,500);
         this.background.colour = 'pink';
-        this.label = new wordContainer(this, this.container,null, "Поздравляем, вы прошли уровень!", {x:this.background.x + 120,y:this.background.y + 150});
+        this.label = new wordContainer(this, this.container,null, 'lol', {x:this.background.x + 120,y:this.background.y + 150});
         this.label.active = false;
 
-        this.button = new Button(this, this.container,this.nextLevel.bind(this), "Next Level", [this.background.x + 250,this.background.y + 250]);
+        this.button = new Button(this, this.container,this.hideMenu.bind(this), "Start level", [this.background.x + 250,this.background.y + 250]);
         this.menu.push(this.background);
         this.menu.push(this.label);
         this.menu.push(this.button);
         
         this.currentLevel = 0;
+        this.label.changeWord(this.levels[this.currentLevel].tip);
+        
         if (this.currentLevel >= this.levels.length - 1){
 
             console.log("this.levels.size",this.levels.length);
@@ -40,7 +41,7 @@ export default class Task{
             this.button.onClick = this.game.endGame.bind(this.game);
 
         }
-        this.hideMenu();
+        //this.hideMenu();
     }
 
     newQuestion(){
@@ -53,32 +54,35 @@ export default class Task{
         points += 1000;
         document.getElementById('score').innerHTML = points;
         if (this.levels[this.currentLevel].won) {
+            if (this.currentLevel >= this.levels.length - 1){
             
+                console.log("this.levels.size",this.levels.length);
+                this.label.text = "Поздравляем, вы прошли игру!";
+                this.button.text =  "Таблица игроков";
+                this.button.onClick = this.game.endGame.bind(this.game);
+                this.hideMenu();
+            }else{    
+                this.button.onClick = this.nextLevel.bind(this);
+                this.label.changeWord("Поздравдяем, вы прошли уровень!");
+                this.button.changeWord("Next level");
             this.showMenu();
-            
+            }   
         }
         
     }
 
     
     nextLevel(){
-
-        
-        console.log("A HULY");
         this.levels[this.currentLevel].active = false;
         this.currentLevel+=1; 
         
+            this.label.changeWord(this.levels[this.currentLevel].tip    ) ;
+            this.button.text =  "Start level";
+            this.button.onClick = this.hideMenu.bind(this);
+            this.showMenu();
             
-        if (this.currentLevel >= this.levels.length - 1){
 
-            console.log("this.levels.size",this.levels.length);
-            this.label.text = "Поздравляем, вы прошли игру!";
-            this.button.text =  "Таблица игроков";
-            this.button.onClick = this.game.endGame.bind(this.game);
-
-        }
         this.levels[this.currentLevel].activate();
-        this.hideMenu();
     }
 
 
@@ -97,14 +101,9 @@ export default class Task{
     }
 
     update(){
-       // console.log(this.currentLevel.question);
-       // console.log(this.currentLevel.rightAnswer);
-        //console.log(this.currentLevel.wrongAnswers);
         if (this.currentLevel  == null){
             this.currentLevel = 0;
         }
-
-      
 
     }
     draw(){

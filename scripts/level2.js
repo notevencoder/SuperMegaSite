@@ -20,6 +20,7 @@ export default class level2 extends level{
             this.container = container;
             this.numOfQuiestions = 0;
             this.set;
+            this.tip = "Лови буквы, которые есть в слове!";
             this.rects = null;
             this.questionRect = new wordContainer(this, this.container,this.checkWin.bind(this), "123", {x:0,y:100} );
             this.questionRect.active = false;
