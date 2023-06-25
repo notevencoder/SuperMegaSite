@@ -60,13 +60,12 @@ export default class Task{
                 this.label.text = "Поздравляем, вы прошли игру!";
                 this.button.text =  "Таблица игроков";
                 this.button.onClick = this.game.endGame.bind(this.game);
-                this.hideMenu();
             }else{    
                 this.button.onClick = this.nextLevel.bind(this);
                 this.label.changeWord("Поздравдяем, вы прошли уровень!");
                 this.button.changeWord("Next level");
-            this.showMenu();
-            }   
+            
+            }this.showMenu();   
         }
         
     }

@@ -108,9 +108,6 @@ export default class level1 extends level{
             this.rects[0].changePos(100,500);
             for (let i = 1; i < this.rects.length; i++){
                 this.rects[i].changePos(Math.round(this.rects[i-1].rect.width) + this.rects[i-1].pos.x, 500 + 60 * (i % 2) );
-                console.log(this.rects[i]);
-                console.log(this.rects[i].rect);
-                console.log(Math.round(this.rects[i-1].rect.width)," - width, ", this.rects[i-1].pos.x, " - x");
 
             }
 
