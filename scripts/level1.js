@@ -46,6 +46,8 @@ export default class level1 extends level{
             
             this.finishButton = new wordContainer(this,this.container,this.checkWin.bind(this), "123", {x:config.canvasWidth / 2,y:config.canvasHeight / 5 * 4}, {x:0,y:0}, false);
             this.finishButton.changeWord("check");
+            this.finishButton.colour = 'green';
+            this.finishButton.defaultColour = 'green';
 
             this.questionRects.active = false;
             this.update();
@@ -119,12 +121,13 @@ export default class level1 extends level{
         let i = 0;
         
         this.zone.draw(0, 'red');
+        this.questionRects.draw(0,0);
         this.rects.forEach(element => {
             element.draw(i,i);
             i++;
         });
 
-        this.questionRects.draw(0,0);
+        
         this.finishButton.draw(0,0);
     }
 
@@ -139,7 +142,8 @@ export default class level1 extends level{
         let ans = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2) );
         console.log("ans ",ans);
         console.log("this text ",a.text);
-        return this.zone.isInRect(a.rect.x, a.rect.y);
+        return this.zone.isInRect(a.rect.x, a.rect.y) || this.zone.isInRect(a.rect.x + a.rect.width, a.rect.y + a.rect.height)
+        ||this.zone.isInRect(a.rect.x + a.rect.width, a.rect.y) || this.zone.isInRect(a.rect.x, a.rect.y + a.rect.height);
     }
 
     win(){
