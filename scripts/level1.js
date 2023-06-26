@@ -143,7 +143,8 @@ export default class level1 extends level{
         console.log("ans ",ans);
         console.log("this text ",a.text);
         return this.zone.isInRect(a.rect.x, a.rect.y) || this.zone.isInRect(a.rect.x + a.rect.width, a.rect.y + a.rect.height)
-        ||this.zone.isInRect(a.rect.x + a.rect.width, a.rect.y) || this.zone.isInRect(a.rect.x, a.rect.y + a.rect.height);
+        ||this.zone.isInRect(a.rect.x + a.rect.width, a.rect.y) || this.zone.isInRect(a.rect.x, a.rect.y + a.rect.height) ||
+        this.zone.isInRect(a.rect.x + a.rect.width/ 2, a.rect.y +  a.rect.height/ 2);
     }
 
     win(){
